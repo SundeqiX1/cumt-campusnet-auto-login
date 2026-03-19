@@ -3,7 +3,7 @@
 English repository name: `cumt-campusnet-auto-login`
 
 一个面向中国矿业大学校园网认证页面的非官方自动登录脚本项目。  
-它的目标很简单：把“你本人手动点击登录按钮”的过程，整理成一个可复用、可审查、可自行修改的本地脚本。
+它的目标很简单：把手动点击登录按钮的过程，整理成一个可复用、可审查、可自行修改的本地脚本。
 
 非官方项目，与中国矿业大学及其信息化建设与管理处不存在隶属、认证或背书关系。
 
@@ -11,7 +11,7 @@ English repository name: `cumt-campusnet-auto-login`
 
 这个仓库只做一件事：
 
-- 使用你自己的校园网账号，向学校当前可见的认证门户发起正常登录请求
+- 使用合法授权的校园网账号，向学校当前可见的认证门户发起正常登录请求
 
 它不做这些事：
 
@@ -32,12 +32,12 @@ English repository name: `cumt-campusnet-auto-login`
 
 ## 适用前提
 
-你需要满足下面几个条件：
+使用本项目之前，建议先确认下面几个前提：
 
-- 你是中国矿业大学校园网合法用户
-- 你使用的是自己的账号
-- 你愿意自行维护本地 `.env` 配置
-- 你理解学校后续若修改认证页面，脚本可能需要重新适配
+- 使用者是中国矿业大学校园网合法用户
+- 使用的是已授权账号
+- 愿意自行维护本地 `.env` 配置
+- 理解学校后续若修改认证页面，脚本可能需要重新适配
 
 ## 当前适配的门户特征
 
@@ -52,12 +52,12 @@ English repository name: `cumt-campusnet-auto-login`
 
 1. 先触发门户跳转
 2. 解析 URL 中的 `wlanuserip`、`wlanacname`、`nasip`、`mac` 等参数
-3. 根据你填写的运营商中文名称，映射后缀候选
+3. 根据配置中的运营商中文名称，映射后缀候选
 4. 依次执行登录尝试
 
 ## 支持的运营商填写方式
 
-在配置文件里，你只需要填写官方中文名称：
+在配置文件里，只需要填写官方中文名称：
 
 - `中国电信`
 - `中国移动`
@@ -71,7 +71,7 @@ English repository name: `cumt-campusnet-auto-login`
 - `中国移动` -> `@cmcc,@yd,@mobile`
 - `中国联通` -> `@unicom,@lt`
 
-如果学校将来修改了后缀规则，你仍然可以用高级配置项 `CUMT_PROVIDER_SUFFIX_CANDIDATES` 手动覆盖。
+如果学校将来修改了后缀规则，仍然可以用高级配置项 `CUMT_PROVIDER_SUFFIX_CANDIDATES` 手动覆盖。
 
 ## 目录结构
 
@@ -103,7 +103,7 @@ cd cumt-campusnet-auto-login
 cp .env.example .env
 ```
 
-### 3. 填写你自己的信息
+### 3. 填写本地配置
 
 编辑 `.env`，至少填写这三项：
 
@@ -140,7 +140,7 @@ bash scripts/run_login.sh
 
 ## 安装快捷指令
 
-如果你希望把这个项目安装成终端命令，可以执行：
+如果希望把这个项目安装成终端命令，可以执行：
 
 ```bash
 bash scripts/install_shortcut.sh
@@ -154,7 +154,7 @@ bash scripts/install_shortcut.sh
 cumt-login
 ```
 
-如果你想自定义命令名，例如 `cumt-net`：
+如果想自定义命令名，例如 `cumt-net`：
 
 ```bash
 bash scripts/install_shortcut.sh cumt-net
@@ -174,7 +174,7 @@ bash scripts/uninstall_shortcut.sh cumt-net
 
 ## 干跑模式
 
-如果你想先确认脚本拼出来的登录 URL，而不真正发起登录，可执行：
+如果想先确认脚本拼出来的登录 URL，而不真正发起登录，可执行：
 
 ```bash
 bash scripts/cumt-campus-login.sh --dry-run
@@ -187,13 +187,13 @@ bash scripts/cumt-campus-login.sh --dry-run
 ### 必填项
 
 - `CUMT_ACCOUNT`
-  - 你的校园网账号或学号
+  - 校园网账号或学号
 
 - `CUMT_PASSWORD`
-  - 你的校园网密码
+  - 校园网密码
 
 - `CUMT_PROVIDER_NAME`
-  - 你的运营商中文名称
+  - 运营商中文名称
   - 仅支持：
     - `中国电信`
     - `中国移动`
@@ -293,15 +293,15 @@ CUMT_PROVIDER_SUFFIX_CANDIDATES=@your_new_suffix
 
 这部分是基于公开资料做的谨慎判断，不构成正式法律意见。
 
-我的判断是：
+一个更稳妥的公开结论是：
 
-- 自动化你本人对学校官方认证页面的正常登录请求，通常不等于违法破解
+- 自动化对学校官方认证页面的正常登录请求，通常不等于违法破解
 - 但它并不是“零风险”，风险主要集中在学校网络使用规则、账号安全和传播方式
 
 更具体地说：
 
 1. 这个脚本调用的是学校现有认证入口，不是绕过认证，也不是攻击或爆破
-2. 只在你自己的账号、你自己的设备上低频使用，风险通常较低
+2. 仅在已授权账号和对应设备上低频使用，风险通常较低
 3. 更需要避免的是：
    - 公开真实凭据
    - 帮他人批量代登
@@ -312,7 +312,7 @@ CUMT_PROVIDER_SUFFIX_CANDIDATES=@your_new_suffix
    - 只公开代码
    - 不公开真实配置
    - 明确标注非官方项目
-   - 明确说明仅限本人已授权账号使用
+   - 明确说明仅限已授权账号使用
    - 提醒用户自行确认学校最新规定
 
 这个判断参考了公开来源：
@@ -327,15 +327,15 @@ CUMT_PROVIDER_SUFFIX_CANDIDATES=@your_new_suffix
 
 ## 是否适合开源
 
-在不包含任何真实账号密码、Cookie、私有日志和个人配置的前提下，我的判断是：
+在不包含任何真实账号密码、Cookie、私有日志和个人配置的前提下，一个更稳妥的公开结论是：
 
 - 开源代码本身通常是可控的
-- 开源你自己的实际配置则不合适
+- 公开实际配置并不合适
 
 换句话说：
 
 - 可以开源脚本
-- 不要开源你的 `.env`
+- 不要开源 `.env`
 
 ## 已知限制
 
